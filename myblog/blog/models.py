@@ -26,17 +26,17 @@ class Post(models.Model):  #tipos de status de cada Post no blog
     objects = models.Manager() #Gerenciador de modelo Default
     published = PublishedManager() #Gerenciador personalizado que retorna os posts publicados.
 
-    def get_absolute_url(self): #ligar postagens especificas.
-        return reverse('blog:post_detail', args=[self.publish.year,
-                                                 self.publish.month,
-                                                 self.publish.day,
-                                                 self.slug])
-
     class Meta:
         ordering = ('-publish',) #serao ordeenados pela data de publicacao
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self): #ligar postagens especificas.
+        return reverse('blog:post_detail', args=[self.publish.year,
+                                                 self.publish.month,
+                                                 self.publish.day,
+                                                 self.slug])
 
 
 
