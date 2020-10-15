@@ -22,3 +22,16 @@ class Post(models.Model):  #tipos de status de cada Post no blog
 
     def __str__(self):
         return self.title
+
+class Evento(models.Model):
+    STATUS_EVENTO = (('encerrado','Encerrado'),
+                     ('aguardando','Aguardando'))
+
+    status = models.CharField(max_length=15, choices=STATUS_EVENTO)
+    title = models.CharField(max_length=255)
+    event_date = models.DateTimeField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event')
+    description = models.TextField()
+
+    def __str__(self): ##Funcao para retornaro nome do Evento a cada objeto evento criado
+        return self.title
